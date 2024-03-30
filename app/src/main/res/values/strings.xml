@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Media Converter</string>
+
+    <string-array name="spinner">
+        <item>PNG</item>
+        <item>JPEG</item>
+        <item>WebP</item>
+    </string-array>
+</resources>
