@@ -11,6 +11,16 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <!-- INVISIBLE -->
+        <Button
+            android:id="@+id/choose_video"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:text="Video"
+            android:visibility="invisible" />
+
         <Button
             android:id="@+id/choose_image"
             android:layout_width="0dp"
@@ -19,57 +29,68 @@
             android:layout_weight="1"
             android:text="Image" />
 
-        <Button
-            android:id="@+id/choose_video"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:text="Video" />
-
+        <!-- INVISIBLE -->
         <Button
             android:id="@+id/choose_audio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="1"
-            android:text="Audio" />
+            android:text="Audio"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/iv"
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scaleType="fitCenter" />
+        android:layout_weight="1">
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TextView
+            android:id="@+id/terminal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:fontFamily="@font/source_code_pro"
+            android:textSize="16sp" />
+
+    </FrameLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:entries="@array/spinner" />
-
-        <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="100" />
+            android:layout_margin="10dp" />
 
         <Button
-            android:id="@+id/save"
+            android:id="@+id/save_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Save" />
 
+        <Button
+            android:id="@+id/share_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Share" />
+
     </LinearLayout>
+
 
 </LinearLayout>

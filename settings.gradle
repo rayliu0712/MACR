@@ -10,8 +10,9 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { url = uri("https://www.jitpack.io" ) }
     }
 }
 
-rootProject.name = "Media Converter"
+rootProject.name = "MACR"
 include ':app'

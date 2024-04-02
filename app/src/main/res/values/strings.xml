@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Media Converter</string>
+    <string name="app_name">MACR</string>
 
-    <string-array name="spinner">
+    <string-array name="image">
         <item>PNG</item>
         <item>JPEG</item>
         <item>WebP</item>
