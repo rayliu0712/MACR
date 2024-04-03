@@ -9,10 +9,6 @@ import android.widget.Toast;
 public class L {
     private static final Handler handler = new Handler(Looper.getMainLooper());
 
-    public static String str(Object obj) {
-        return String.valueOf(obj);
-    }
-
     public static String byteString(long _bytes) {
         float bytes = Float.parseFloat(Long.toString(_bytes));
 
