@@ -58,7 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:fontFamily="@font/source_code_pro"
-            android:textSize="16sp" />
+            android:textSize="12sp" />
 
     </FrameLayout>
 
