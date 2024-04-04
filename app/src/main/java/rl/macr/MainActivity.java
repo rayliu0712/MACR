@@ -1,23 +1,29 @@
 package rl.macr;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
+    public static final int REQUEST_WRITE_PERMISSION = 6;
+
     private final int CHOOSE_IMAGE = 0;
     private final int RECEIVED_IMAGE = 3;
-    private ImageFragment imageFragment;
     private Button chooseImage;
+    private ImageFragment imageFragment;
 
     public TextView terminal;
     public Spinner spinner;
@@ -29,8 +35,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        File[] files = getFilesDir().listFiles();
+        if (files != null) {
+            for (File file : files) {
+                file.delete();
+            }
+        }
+
         Intent startIntent = getIntent();
         boolean isStartByReceiving = Intent.ACTION_SEND.equals(startIntent.getAction()) && startIntent.getType() != null;
+
+        findViewById(R.id.container).setOnClickListener(v ->
+                ((InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE))
+                        .hideSoftInputFromWindow(v.getWindowToken(), 0));
 
         terminal = findViewById(R.id.terminal);
         spinner = findViewById(R.id.spinner);
@@ -52,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
                 intent.setType("*/*");
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"image/png", "image/jpeg", "image/webp"});
-                } else {
-                    // TODO
                 }
                 startActivityForResult(intent, CHOOSE_IMAGE);
             });
@@ -96,6 +111,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_WRITE_PERMISSION) {
+            if (grantResults[0] == 0) {
+                imageFragment.save(this);
+            }
+        }
+    }
+
     private void setFragment(int fragment, Uri uri, String filename, String fileExtension, long size) {
         if (fragment == CHOOSE_IMAGE || fragment == RECEIVED_IMAGE) {
             imageFragment = new ImageFragment(uri, filename, String.format("%s/%s", fileExtension, L.byteString(size)));
@@ -103,11 +129,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void setButtonEnabled(boolean enabled) {
+    public void setViewEnabled(boolean enabled) {
         L.handler(() -> {
             chooseImage.setEnabled(enabled);
+            terminal.setEnabled(enabled);
+            spinner.setEnabled(enabled);
             saveBtn.setEnabled(enabled);
             shareBtn.setEnabled(enabled);
+            imageFragment.qualityET.setEnabled(enabled);
+            imageFragment.ifSaveMemCB.setEnabled(enabled);
         });
     }
 }

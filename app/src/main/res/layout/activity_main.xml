@@ -14,7 +14,6 @@
 
         <!-- INVISIBLE -->
         <Button
-            android:id="@+id/choose_video"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -32,7 +31,6 @@
 
         <!-- INVISIBLE -->
         <Button
-            android:id="@+id/choose_audio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
@@ -57,7 +55,8 @@
             android:id="@+id/terminal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
             android:fontFamily="@font/source_code_pro"
             android:textSize="12sp" />
 
